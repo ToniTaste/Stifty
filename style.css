@@ -1,0 +1,140 @@
+body {
+  height: 100%;
+  font-family: sans-serif;
+  margin: 10px;
+}
+
+#mainLayout {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 7rem); /* Platz für Überschrift oben */
+}
+
+#blocklyDiv {
+  flex: 0 1 700px;   /* flexibel, aber bevorzugt 700px */
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#canvasContainer {
+  position: relative;
+  width: 500px;
+  height: 600px;
+}
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0 1rem;
+}
+
+#controls label {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+#controls button {
+  width: 100%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5rem;
+}
+
+
+#timeoutSlider {
+  width: 100px;
+  margin: 0 0.5rem;
+}
+
+.speed-icon {
+  font-size: 1.5rem;
+}
+
+/* Wrapper: zwei Spalten nebeneinander */
+.angle-dropdown-wrapper {
+  display: flex;
+}
+
+/* Linke Spalte: Liste in max-height und zwei Spalten ab mehr als 5 Einträgen */
+.angle-list-container {
+  flex: 1;
+  /*max-height: 250px;*/
+  overflow-y: auto;
+  column-count: 2;
+  column-gap: 12px;
+
+  /* ein einziger Border nach rechts */
+  column-rule: 1px solid #ccc;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+.blocklyMenuItem {
+  min-width: 1.5em;
+}
+
+/* Rechte Spalte: Preview mit Border links */
+.angle-preview-container {
+  flex: none;
+  width: 160px;
+  /* genug Platz für den Helper */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-left: 12px;
+  box-sizing: border-box;
+}
+
+.cdo-angle-helper-svg {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.cdo-angle-helper-bg {
+  fill: none;
+  stroke: #444;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.cdo-angle-helper-arc {
+  fill: none;
+  stroke: #4C97FF;
+  stroke-width: 4;
+}
+
+.cdo-angle-helper-skel {
+  stroke: #4C97FF;
+  stroke-width: 2;
+}
+
+.cdo-angle-helper-center {
+  fill: #4C97FF;
+}
+
+/* Reihenfolge der drei Canvases */
+#bgCanvas {
+  z-index: 0;
+  background-color: #f0f0f0;
+}
+
+#lineCanvas {
+  z-index: 1;
+}
+
+#stiftCanvas {
+  z-index: 2;
+}
