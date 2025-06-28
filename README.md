@@ -11,6 +11,7 @@ Ein webbasiertes Zeichenprojekt mit Blockly – inspiriert von Turtle Graphics. 
 - Farbwahl und Stiftbreiten-Dropdown
 - Freie Winkeleingabe mit Vorschauhilfe
 - Speichern/Laden des Programmcodes als XML
+- Konfiguration in den Dateien im Ordner data durch Lehrkraft anpassbar
 
 ## 🖼️ Screenshot
 
