@@ -128,7 +128,7 @@ canvas {
 /* Reihenfolge der drei Canvases */
 #bgCanvas {
   z-index: 0;
-  background-color: #f0f0f0;
+  background-color: #fff;
 }
 
 #lineCanvas {
