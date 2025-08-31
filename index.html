@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Stift-Blockly</title>
+  <title>Stifty – der Blockly-Maler</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Blockly 11.2.2 über UNPKG -->
+  <!-- Blockly 11.2.2 -->
   <script src="./scripts/org/blockly_compressed.js"></script>
   <script src="./scripts/org/javascript_compressed.js"></script>
   <script src="./scripts/org/blocks_compressed.js"></script>
@@ -23,36 +23,45 @@
 </head>
 
 <body>
-  <h1>Stift-Blockly</h1>
+  <h1>Stifty – der Blockly-Maler</h1>
+
   <div id="mainLayout">
+
     <div id="blocklyDiv"></div>
+
     <div id="controls">
-      <label>
-        <span class="speed-icon">🐢</span>
-        <input type="range" id="timeoutSlider" min="5" max="100" step="5" value="70" />
+      <div class="slider-col">
         <span class="speed-icon">🐎</span>
-      </label>
-      <button onclick="startRun()">▶️ Start</button>
-      <button onclick="stoppAll()">⏹️ Abbruch</button>
-      <button onclick="startStep()">⏯️ Schritt</button>
-      <button onclick="resetProgram()">↩️ Blöcke zurücksetzen</button>
-      <button onclick="reloadAll()">🔁 Alles zurücksetzen</button>
-      <hr width="100%">
-      <button onclick="loadSVG()">🖼️ Hintergrund laden</button> <input type="file" id="svgInput" accept=".svg"
-        style="display:none;" />
-      <button onClick="clearBackground()">⎕ Hintergrund löschen</button>
-      <button onclick="loadProject()">📂 Programm laden</button><input type="file" id="xmlInput" accept=".xml"
-        style="display:none;" />
-      <button onclick="saveProject()">💾 Programm speichern</button>
-      <button onclick="exportSVG()">⌺ Grafik speichern</button>
+        <input type="range" id="timeoutSlider" min="5" max="100" step="5" value="50" orient="vertical" title="Geschwindigkeit einstellen: oben = schneller, unten = langsamer"/>
+        <span class="speed-icon">🐢</span>
+      </div>
+      <button onclick="startRun()" title="Start">▶️</button>
+      <button onclick="stoppAll()" title="Stopp/Abbruch">⏹️</button>
+      <button onclick="startStep()" title="Einzelschritt">⏯️</button>
+      <button onclick="reloadAll()" title="Neustart">🔁</button>
     </div>
 
+    <!-- Canvas rechts -->
     <div id="canvasContainer">
       <canvas id="bgCanvas" width="500" height="600"></canvas>
       <canvas id="lineCanvas" width="500" height="600"></canvas>
       <canvas id="stiftCanvas" width="500" height="600"></canvas>
     </div>
   </div>
+
+
+<div id="bottomControls">
+	   <button onclick="loadProject()">📂 Programm laden</button>
+	   <input type="file" id="xmlInput" accept=".xml"  style="display:none;" />
+      <button onclick="saveProject()">💾 Programm speichern</button>
+      <button onclick="exportSVG()">⌺ Grafik speichern</button>
+  <button onclick="loadSVG()">🖼️ Hintergrund laden</button> 
+  <input type="file" id="svgInput" accept=".svg" style="display:none;" />
+      <button onClick="clearBackground()">⎕ Hintergrund löschen</button>
+     
+
+</div>
+
 
   <!-- Toolbox -->
   <xml id="toolbox" style="display: none">
@@ -62,10 +71,8 @@
     <block type="stift_farbe"></block>
     <block type="stift_zufallsfarbe"></block>
     <block type="stift_breite"></block>
-    <!--<block type="stift_sichtbarkeit"></block>-->
     <block type="custom_repeat"></block>
   </xml>
 
 </body>
-
 </html>
