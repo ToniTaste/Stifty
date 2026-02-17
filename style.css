@@ -123,3 +123,67 @@ canvas {
 #bottomControls button:hover {
   background: #ddd;
 }
+
+/* Wrapper: zwei Spalten nebeneinander */
+.angle-dropdown-wrapper {
+  display: flex;
+}
+
+/* Linke Spalte: Liste in max-height und zwei Spalten ab mehr als 5 Einträgen */
+.angle-list-container {
+  flex: 1;
+  /*max-height: 250px;*/
+  overflow-y: auto;
+  column-count: 2;
+  column-gap: 12px;
+
+  /* ein einziger Border nach rechts */
+  column-rule: 1px solid #ccc;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+.blocklyMenuItem {
+  min-width: 1.5em;
+}
+
+/* Rechte Spalte: Preview mit Border links */
+.angle-preview-container {
+  flex: none;
+  width: 160px;
+  /* genug Platz für den Helper */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-left: 12px;
+  box-sizing: border-box;
+}
+
+.cdo-angle-helper-svg {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.cdo-angle-helper-bg {
+  fill: none;
+  stroke: #444;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.cdo-angle-helper-arc {
+  fill: none;
+  stroke: #4C97FF;
+  stroke-width: 4;
+}
+
+.cdo-angle-helper-skel {
+  stroke: #4C97FF;
+  stroke-width: 2;
+}
+
+.cdo-angle-helper-center {
+  fill: #4C97FF;
+}
