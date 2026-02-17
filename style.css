@@ -53,8 +53,8 @@ h1 {
 }
 
 #timeoutSlider {
-  writing-mode: bt-lr;                  /* von unten nach oben */
-  -webkit-appearance: slider-vertical;  /* Chrome/Safari */
+  writing-mode: vertical-lr; 
+  direction: rtl;
   width: 8px;
   height: 120px;
 }
