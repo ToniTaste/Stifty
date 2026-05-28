@@ -5,7 +5,7 @@ const defaultProgramXml = `
 
 <xml xmlns="https://developers.google.com/blockly/xml">
   <block type="stift_start" id="b0_1750434210712" deletable="false" x="131" y="154">
-    <statement name="NEXT">
+    <next>
       <block type="custom_repeat" id="b1_1750434210712">
         <field name="TIMES">3</field>
         <statement name="DO">
@@ -21,7 +21,7 @@ const defaultProgramXml = `
           </block>
         </statement>
       </block>
-    </statement>
+    <next>
   </block>
 </xml>
 
