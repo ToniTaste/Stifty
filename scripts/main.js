@@ -7,6 +7,7 @@ let stepsInitialized = false;
 let isRunning = false;
 let runTimeoutID = null;
 let MAX_BLOCKS = 100;
+const MAX_EXECUTION_STEPS = 5000;
 
 /**
  * Globale Highlight-Funktion, die von Generated-Code aufgerufen wird.
@@ -78,6 +79,9 @@ function loadXmlWithCustomAngles(xmlText) {
             if (angleMap.hasOwnProperty(blockId)) {
                 const savedValue = angleMap[blockId]; // z.B. "11"
                 const field = block.getField('ANGLE');
+				if (!field) {
+					return;
+				}
                 const options = field.menuGenerator_;
                 const exists = options.some(opt => opt[1] === savedValue);
 
@@ -427,7 +431,11 @@ function runInit() {
     code = unrollLoops(code);
 
     currentSteps = buildExecutionSteps(code);
-
+	if (currentSteps.length > MAX_EXECUTION_STEPS) {
+    alert(`⚠️ Das Programm erzeugt zu viele Einzelschritte (${currentSteps.length}). Erlaubt sind maximal ${MAX_EXECUTION_STEPS}.`);
+    currentSteps = [];
+    return false;
+    }
     return true;
 }
 
