@@ -116,11 +116,6 @@ function stiftSetzeZustand(state) {
 
 function stiftSetzeFarbe(colour) {
   penColor = colour;
-  // Optional: Vektor-Befehl protokollieren (falls du vectorCommands nutzt)
-  if (Array.isArray(vectorCommands)) {
-    vectorCommands.push({ type: 'colour', color: penColor });
-  }
-  // Optional: Stift‐Symbol neu zeichnen, damit man die Änderung sofort sieht
   drawStift();
 }
 

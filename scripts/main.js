@@ -386,13 +386,12 @@ function startRun() {
         return;
     }
 
-    isRunning = true;
-
     if (!runInit()) {
         isRunning = false;
         return;
     }
 
+    isRunning = true;
     runRun();
 }
 
@@ -439,6 +438,7 @@ function runRun() {
     if (currentSteps.length === 0) {
         resetHighlight();
         isRunning = false; // Run beendet
+		runTimeoutID = null;
         return;
     }
     const chunk = currentSteps.shift();
@@ -446,9 +446,11 @@ function runRun() {
         eval(chunk);
     } catch (e) {
         alert('❌ Fehler im Programm:\n' + e.message);
-        stiftReset();
+        drawStift();
         stepsInitialized = false;
         currentSteps = [];
+        isRunning = false;
+        runTimeoutID = null;
         return;
     }
     const slider = document.getElementById('timeoutSlider');
