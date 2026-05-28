@@ -21,7 +21,7 @@ const defaultProgramXml = `
           </block>
         </statement>
       </block>
-    <next>
+    </next>
   </block>
 </xml>
 
