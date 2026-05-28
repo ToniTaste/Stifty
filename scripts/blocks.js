@@ -7,16 +7,9 @@ registerFieldColour();
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "stift_start",
-    "hidden": true,
     "message0": "Start",
-    "message1": "%1",
-    "args1": [
-      {
-        "type": "input_statement",
-        "name": "NEXT"
-      }
-    ],
-    "colour": "FFBF00",
+    "nextStatement": null,
+    "style": "start_blocks",
     "tooltip": "Startpunkt des Programms",
     "helpUrl": ""
   },
