@@ -124,6 +124,20 @@ canvas {
   background: #ddd;
 }
 
+#moveStiftButton.active {
+  background: #ffd966;
+  border-color: #c09000;
+}
+
+#stiftCanvas.move-mode {
+  cursor: grab;
+  touch-action: none;
+}
+
+#stiftCanvas.move-mode:active {
+  cursor: grabbing;
+}
+
 /* Wrapper: zwei Spalten nebeneinander */
 .angle-dropdown-wrapper {
   display: flex;
