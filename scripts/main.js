@@ -104,6 +104,8 @@ function loadXmlWithCustomAngles(xmlText) {
     // 6. Initialisierungen für Lauf/Schrittbetrieb zurücksetzen
     stepsInitialized = false;
     stiftReset();
+	drawStift();
+	deaktiviereStiftVerschieben();
 }
 
 const stiftyTheme = Blockly.Theme.defineTheme('stiftyTheme', {
@@ -616,12 +618,121 @@ function unrollLoops(code) {
 // Jetzt Event-Handler registrieren und initiales Laden:
 // ─────────────────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────────────
+let stiftVerschiebenAktiv = false;
+let stiftWirdGezogen = false;
+
+
+function setzeStiftVerschiebenAktiv(aktiv) {
+    stiftVerschiebenAktiv = aktiv;
+
+    const button = document.getElementById('moveStiftButton');
+    const canvas = document.getElementById('stiftCanvas');
+
+    if (!button || !canvas) {
+        return;
+    }
+
+    if (stiftVerschiebenAktiv) {
+        button.classList.add('active');
+        canvas.classList.add('move-mode');
+
+    } else {
+        button.classList.remove('active');
+        canvas.classList.remove('move-mode');
+        stiftWirdGezogen = false;
+    }
+}
+
+function toggleStiftVerschieben() {
+    if (isRunning) {
+        return;
+    }
+
+    setzeStiftVerschiebenAktiv(!stiftVerschiebenAktiv);
+}
+
+function deaktiviereStiftVerschieben() {
+    setzeStiftVerschiebenAktiv(false);
+}
+
+function ermittleCanvasPosition(event) {
+    const canvas = document.getElementById('stiftCanvas');
+    const rect = canvas.getBoundingClientRect();
+
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    return {
+        x: (event.clientX - rect.left) * scaleX,
+        y: (event.clientY - rect.top) * scaleY
+    };
+}
+
+function initialisiereStiftVerschieben() {
+    const canvas = document.getElementById('stiftCanvas');
+
+    canvas.addEventListener('pointerdown', function (event) {
+        if (!stiftVerschiebenAktiv || isRunning) {
+            return;
+        }
+
+        stiftWirdGezogen = true;
+        canvas.setPointerCapture(event.pointerId);
+
+        const pos = ermittleCanvasPosition(event);
+        stiftSetzeStartposition(pos.x, pos.y);
+
+        event.preventDefault();
+    });
+
+    canvas.addEventListener('pointermove', function (event) {
+        if (!stiftVerschiebenAktiv || !stiftWirdGezogen || isRunning) {
+            return;
+        }
+
+        const pos = ermittleCanvasPosition(event);
+        stiftSetzeStartposition(pos.x, pos.y);
+
+        event.preventDefault();
+    });
+
+    canvas.addEventListener('pointerup', function (event) {
+        stiftWirdGezogen = false;
+        try {
+            canvas.releasePointerCapture(event.pointerId);
+        } catch (e) {
+            // Falls der Pointer nicht mehr gehalten wird: ignorieren.
+        }
+    });
+
+    canvas.addEventListener('pointercancel', function () {
+        stiftWirdGezogen = false;
+    });
+	
+	document.addEventListener('click', function (event) {
+    const button = event.target.closest('button');
+
+    if (!button) {
+        return;
+    }
+
+    // Der Hand-Button selbst darf natürlich umschalten.
+    if (button.id === 'moveStiftButton') {
+        return;
+    }
+
+    // Jeder andere Button beendet den Verschiebemodus.
+    deaktiviereStiftVerschieben();
+}, true);
+}
+
 
 window.addEventListener('load', () => {
     // 1) Blockly und Canvas initialisieren
     initBlockly();
     stiftReset();
     drawStift();
+	initialisiereStiftVerschieben();
 
     // 2) Standard-Hintergrund (falls konfiguriert)
     if (window.DEFAULT_BACKGROUND_SVG) {

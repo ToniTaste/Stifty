@@ -1,4 +1,6 @@
-let x = window.DEFAULT_PEN_X, y = window.DEFAULT_PEN_Y, angle = 0, penDown = true;
+let startX = window.DEFAULT_PEN_X;
+let startY = window.DEFAULT_PEN_Y;
+let x = startX, y = startY, angle = 0, penDown = true;
 let penColor = window.DEFAULT_PEN_COLOR;
 let penWidth = window.DEFAULT_PEN_WIDTH;
 let lineCtx, stiftCtx;
@@ -6,8 +8,8 @@ let stiftIstSichtbar = true;
 const vectorCommands = [];
 
 function stiftReset() {
-  x = window.DEFAULT_PEN_X;
-  y = window.DEFAULT_PEN_Y;
+  x = startX;
+  y = startY;
   angle = 0;
   penDown = true;
   penColor = window.DEFAULT_PEN_COLOR;
@@ -129,3 +131,15 @@ function stiftSetzeZufallsfarbe() {
 function stiftSetzeBreite(width) {
   penWidth = width;
 }
+
+function stiftSetzeStartposition(newX, newY) {
+  startX = newX;
+  startY = newY;
+
+  x = startX;
+  y = startY;
+  angle = 0;
+
+  drawStift();
+}
+
